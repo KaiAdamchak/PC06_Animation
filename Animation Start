@@ -1,70 +1,53 @@
 """
-Animates a circle (that wraps around the screen)
-"""
+Pygame Startere Code
+ATLS 1300
+Author: YOUR NAME(S)
+DATE
+NOTE: the animation loop is inifinite. You will have to add a conditional
+to break the loop, if desired. Infinite looping animation can be used intentionally!
+This is a description of what this code does. You should edit this line to get 
+full credit on assignments. The code will CONTINUE TO RUN 
+(meaning you cannot run it again) until you close the window!
+'''"""
 
 import pygame
-import math
-pygame.init()
+pygame.init() # initialize pygame managers
 
 # create a window
 w = 600
 h = 600
-win = pygame.display.set_mode((w,h)) # Set window to size (w,h)
+win = pygame.display.set_mode((w,h)) # define window variable
+# pygame.display.set_caption("Read carefully.") # uncomment & edit to caption the window
 
-#Set up clock for animation
-clock = pygame.time.Clock() # animation control
-
-def wrapAround(x,w):
-    if x > w:
-        x = 0 # send circle to the start of x position
-    return x
-
-# Creates poihts on a circle path
-# solve x, y along circle, set radius
-def loop():
-    rad = 50
+#======================== Variables & functions ===================================================
+WHITE = (255,255,255) # some handy RGB values
+BLACK = (0,0,0)
 
 
-    for t in range(360):
-        angle = math.radians(t)
-        X = rad * math.sin(angle)
-        Y = rad * math.cos(angle)
-        pygame.draw.circle(win,(255,255,255),(X+w/2,Y+h/2),rad,0) # Drawing white filled circle at (0,h/2)
-        #Update, Wait
-        pygame.display.update() # Draws everything to window
-        clock.tick(30)
 
+#================================ Animation loop ===================================================
+# start values defined here
+running = True
+clock = pygame.time.Clock() # for framerate timing
 
-# start coordinates & conditions
-step = 5 # step size for bobbing animation, in pixels
-angle = 0 # start value for sine angle
-running = True # Control animation loop
-x,y = 0, h/2 # Assign start location
-cross = 0 # Start value for counter 
-
-while running: 
-    # Draw task 
+while running:
+    # clear window (comment out to have trace behind animation)
+    win.fill(BLACK)
     
-    win.fill((0,0,0)) # clearing screen, filling it black
-
-    pygame.draw.circle(win,(255,255,255),(x,y),50,0) # Drawing white filled circle at (0,h/2)
-     # circle arugments - surface, color, center, radius, fill/line
-    x += step
-    # # x = x + step
+    # This loop allows windows when exit is clicked.
+    # Do not change, remove or augment this loop...yet.
+    for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False # stops animation
+                
+    #================== Your animation tasks ================
+    # call functions, increment values
     
-    x = wrapAround(x,w)
-    if (x==0):
-        x = 0
-        cross += 1
-    elif (x == w/2):
-        loop() 
+    # stop conditional would go here too
+    
+    
+    #================== Animation control ===================
+    pygame.display.update()
+    clock.tick(30) # framerate in fps (30-60 is typical)
 
-
-    # # stop task
-    if cross == 10: 
-        running = False
-
-
-#Update, Wait
-    pygame.display.update() # Draws everything to window
-    clock.tick(30)
+# pygame.display.quit() # uncomment to automatically close window at end of animation    
