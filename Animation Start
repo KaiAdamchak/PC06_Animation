@@ -8,7 +8,7 @@ Description:
 Ball goes across screen and when it interacts with the boundaries of the window it changes color and direction.
 '''"""
 
-import pygame
+import pygame, random, math
 pygame.init() # initialize pygame managers
 
 # create a window
@@ -27,12 +27,13 @@ BLACK = (0,0,0)
 # start values defined here
 running = True
 clock = pygame.time.Clock() # for framerate timing
+color = random.choice("red", "orange", "yellow", "green", "blue", "violet", "white")
 
 while running:
     # clear window (comment out to have trace behind animation)
     win.fill(BLACK)
     
-    pygame.draw.circle(win, (255, 255, 255), (w/2, h/2), 50, 0) #drawing white filled circle in the middle of the screen
+    pygame.draw.circle(win, color, (w/2, h/2), 50, 0) #drawing white filled circle in the middle of the screen
     # This loop allows windows when exit is clicked.
     # Do not change, remove or augment this loop...yet.
     for event in pygame.event.get():
