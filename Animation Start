@@ -1,7 +1,7 @@
 """
 Pygame Startere Code
 ATLS 1300
-Author: YOUR NAME(S)
+Author: Juliette Goubeaud, 
 10/14/2022
 NOTE: the animation loop is inifinite. You will have to add a conditional
 to break the loop, if desired. Infinite looping animation can be used intentionally!
