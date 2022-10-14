@@ -32,6 +32,7 @@ while running:
     # clear window (comment out to have trace behind animation)
     win.fill(BLACK)
     
+    pygame.draw.circle(win, (255, 255, 255), (x, y), 50, 0) #drawing white filled circle
     # This loop allows windows when exit is clicked.
     # Do not change, remove or augment this loop...yet.
     for event in pygame.event.get():
