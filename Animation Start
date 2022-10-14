@@ -24,6 +24,8 @@ BLACK = (0,0,0)
 
 
 #================================ Animation loop ===================================================
+def 
+
 # start values defined here
 running = True
 clock = pygame.time.Clock() # for framerate timing
@@ -33,7 +35,7 @@ while running:
     # clear window (comment out to have trace behind animation)
     win.fill(BLACK)
     
-    pygame.draw.circle(win, color, (w/2, h/2), 50, 0) #drawing white filled circle in the middle of the screen
+    pygame.draw.circle(win, color, (w/2, h/2), 30, 0) #drawing white filled circle in the middle of the screen
     # This loop allows windows when exit is clicked.
     # Do not change, remove or augment this loop...yet.
     for event in pygame.event.get():
