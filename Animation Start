@@ -3,11 +3,9 @@ Pygame Startere Code
 ATLS 1300
 Author: Juliette Goubeaud, Autumn Bement, Kai Adamchak
 10/14/2022
-NOTE: the animation loop is inifinite. You will have to add a conditional
-to break the loop, if desired. Infinite looping animation can be used intentionally!
-This is a description of what this code does. You should edit this line to get 
-full credit on assignments. The code will CONTINUE TO RUN 
-(meaning you cannot run it again) until you close the window!
+
+Description:
+Ball goes across screen and when it interacts with the boundaries of the window it changes color and direction.
 '''"""
 
 import pygame
