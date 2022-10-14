@@ -1,0 +1,70 @@
+"""
+Animates a circle (that wraps around the screen)
+"""
+
+import pygame
+import math
+pygame.init()
+
+# create a window
+w = 600
+h = 600
+win = pygame.display.set_mode((w,h)) # Set window to size (w,h)
+
+#Set up clock for animation
+clock = pygame.time.Clock() # animation control
+
+def wrapAround(x,w):
+    if x > w:
+        x = 0 # send circle to the start of x position
+    return x
+
+# Creates poihts on a circle path
+# solve x, y along circle, set radius
+def loop():
+    rad = 50
+
+
+    for t in range(360):
+        angle = math.radians(t)
+        X = rad * math.sin(angle)
+        Y = rad * math.cos(angle)
+        pygame.draw.circle(win,(255,255,255),(X+w/2,Y+h/2),rad,0) # Drawing white filled circle at (0,h/2)
+        #Update, Wait
+        pygame.display.update() # Draws everything to window
+        clock.tick(30)
+
+
+# start coordinates & conditions
+step = 5 # step size for bobbing animation, in pixels
+angle = 0 # start value for sine angle
+running = True # Control animation loop
+x,y = 0, h/2 # Assign start location
+cross = 0 # Start value for counter 
+
+while running: 
+    # Draw task 
+    
+    win.fill((0,0,0)) # clearing screen, filling it black
+
+    pygame.draw.circle(win,(255,255,255),(x,y),50,0) # Drawing white filled circle at (0,h/2)
+     # circle arugments - surface, color, center, radius, fill/line
+    x += step
+    # # x = x + step
+    
+    x = wrapAround(x,w)
+    if (x==0):
+        x = 0
+        cross += 1
+    elif (x == w/2):
+        loop() 
+
+
+    # # stop task
+    if cross == 10: 
+        running = False
+
+
+#Update, Wait
+    pygame.display.update() # Draws everything to window
+    clock.tick(30)
