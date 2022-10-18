@@ -21,26 +21,14 @@ win = pygame.display.set_mode((w,h)) # define window variable
 WHITE = (255,255,255) # some handy RGB values
 BLACK = (0,0,0)
 
-def oscillate(Step, xpos, x, y, clock, col_choice, running):
-    win.fill(BLACK)
-
-    pygame.draw.circle(win, col_choice, (x+xpos, y), 30, 0) #drawing white filled circle in the middle of the screen
+def oscillate(xpos, step):
     while running:
-        xpos += Step
-        if xpos >= 600 or xpos <= 0:
-            Step *= -1
+        xpos += step
+        if xpos >= 300 or xpos <= -300:
+            step *= -1
         else:
-            xpos += Step
-        return Step, xpos, x, y, clock, col_choice, running
-
-    # This loop allows windows when exit is clicked.
-    # Do not change, remove or augment this loop...yet.
-    for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False # stops animation
-    
-    pygame.display.update()
-    clock.tick(30)
+            xpos += step
+        return step
 
 
 #================================ Animation loop ===================================================
@@ -61,9 +49,10 @@ win.fill(BLACK)
 while running:
     # clear window (comment out to have trace behind animation)
     win.fill(BLACK)
-    
+    pygame.draw.circle(win, col_choice, (x+xpos,y), 50)
+
     xpos += Step
-    oscillate(Step, xpos, x, y, clock, col_choice, running)
+    Step = oscillate(xpos, Step)
 
     # This loop allows windows when exit is clicked.
     # Do not change, remove or augment this loop...yet.
@@ -81,4 +70,4 @@ while running:
     pygame.display.update()
     clock.tick(30) # framerate in fps (30-60 is typical)
 
-# pygame.display.quit() # uncomment to automatically close window at end of animation    
+# pygame.display.quit() # uncomment to automatically close window at end of animation 
