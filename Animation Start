@@ -35,16 +35,17 @@ xpos = 5
 x = w/2
 y = h/2
 clock = pygame.time.Clock() # for framerate timing
-color = random.choice("red", "orange", "yellow", "green", "blue", "violet", "white")
+color = ("red", "orange", "yellow", "green", "blue", "violet", "white")
+col_choice = random.choice(color)
 running = True
 
 while running:
     # clear window (comment out to have trace behind animation)
     win.fill(BLACK)
     
-    pygame.draw.circle(win, color, (x+xpos, y), 30, 0) #drawing white filled circle in the middle of the screen
+    pygame.draw.circle(win, col_choice, (x+xpos, y), 30, 0) #drawing white filled circle in the middle of the screen
     xpos += Step
-    Step = oscillate(xpos, Step)
+    step = oscillate(xpos, Step)
     
     # This loop allows windows when exit is clicked.
     # Do not change, remove or augment this loop...yet.
