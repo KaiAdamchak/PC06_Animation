@@ -49,6 +49,7 @@ win.fill(BLACK)
 while running:
     # clear window (comment out to have trace behind animation)
     win.fill(BLACK)
+    col_choice = random.choice(color)
     pygame.draw.circle(win, col_choice, (x+xpos,y), 50)
 
     xpos += Step
