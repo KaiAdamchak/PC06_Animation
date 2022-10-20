@@ -30,6 +30,13 @@ def newColor(new):
         # return the new color value
         return new
 
+# create a function to call to count how many times the code has iterated
+def iterationCount(iter):
+    while running:
+        if xpos >= 295 or xpos <= -295:
+            iter += 1
+        return iter
+
 # create a function to call to change the direction of the ball after it interacts with the boundaries of the window
 def oscillate(xpos, step):
     while running:
@@ -54,8 +61,8 @@ y = h/2
 clock = pygame.time.Clock() # for framerate timing
 color = ("red", "orange", "yellow", "green", "blue", "purple", "violet", "white")
 col_choice = random.choice(color)
+iteration = 0
 running = True
-count = 0 # Counter
 
 # make sure the window fills in black to start
 win.fill(BLACK)
@@ -66,31 +73,33 @@ while running:
     # create a circle to animate
     pygame.draw.circle(win, col_choice, (x+xpos,y), 50)
 
-    # start moving the circle
+    #start moving the circle
     xpos += Step
-    # start counting the iterations
-    count += 1
-    # call oscillate() function
+    #call oscillate() function
     Step = oscillate(xpos, Step)
-    # call newColor() function
-    col_choice = newColor(xpos, col_choice)
-  
+    #call newColor() function
+    col_choice = newColor(col_choice)
+    #call iterationCount() function
+    iteration = iterationCount(iteration)
+
+    # if the code has iterated a certain number of times, stop the code from running
+    if iteration >= 20:
+        running = False
 
     # This loop allows windows when exit is clicked.
     # Do not change, remove or augment this loop...yet.
     for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False # stops animation
-
-    # if the iterations go more than 2000 times, stop running the code
-    if count == 2000:
-        running = False
-
+                
     #================== Your animation tasks ================
-    # stop conditional would go here     
+    # call functions, increment values
+    
+    # stop conditional would go here too
+    
     
     #================== Animation control ===================
     pygame.display.update()
     clock.tick(30) # framerate in fps (30-60 is typical)
 
-#pygame.display.quit() # uncomment to automatically close window at end of animation 
+# pygame.display.quit() # uncomment to automatically close window at end of animation 
