@@ -21,7 +21,7 @@ win = pygame.display.set_mode((w,h)) # define window variable
 WHITE = (255,255,255) # some handy RGB values
 BLACK = (0,0,0)
 
-def newColor(xpos, new):
+def newColor(new):
     while running:
         if xpos >= 295 or xpos <= -295:
             new = random.choice(color)
@@ -59,7 +59,7 @@ while running:
 
     xpos += Step
     Step = oscillate(xpos, Step)
-    col_choice = newColor(xpos, col_choice)
+    col_choice = newColor(col_choice)
 
     # This loop allows windows when exit is clicked.
     # Do not change, remove or augment this loop...yet.
