@@ -80,6 +80,6 @@ while running:
     
     #================== Animation control ===================
     pygame.display.update()
-    clock.tick(90) # framerate in fps (30-60 is typical)
+    clock.tick(30) # framerate in fps (30-60 is typical)
 
 #pygame.display.quit() # uncomment to automatically close window at end of animation 
