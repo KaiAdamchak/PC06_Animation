@@ -21,7 +21,8 @@ win = pygame.display.set_mode((w,h)) # define window variable
 WHITE = (255,255,255) # some handy RGB values
 BLACK = (0,0,0)
 
-def newColor(new):
+# Changes the color of the circle every time it bounces off the wall
+def newColor(xpos, new):
     while running:
         if xpos >= 295 or xpos <= -295:
             new = random.choice(color)
@@ -34,6 +35,7 @@ def oscillate(xpos, step):
             step *= -1
         else:
             xpos += step
+
         return step
 
 
@@ -48,6 +50,7 @@ clock = pygame.time.Clock() # for framerate timing
 color = ("red", "orange", "yellow", "green", "blue", "purple", "violet", "white")
 col_choice = random.choice(color)
 running = True
+count = 0 # Counter
 
 
 win.fill(BLACK)
@@ -58,23 +61,25 @@ while running:
     pygame.draw.circle(win, col_choice, (x+xpos,y), 50)
 
     xpos += Step
+    count += 1
     Step = oscillate(xpos, Step)
-    col_choice = newColor(col_choice)
+    col_choice = newColor(xpos, col_choice)
+  
 
     # This loop allows windows when exit is clicked.
     # Do not change, remove or augment this loop...yet.
     for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False # stops animation
-                
+
+    if count == 2000:
+        running = False
+
     #================== Your animation tasks ================
-    # call functions, increment values
-    
-    # stop conditional would go here too
-    
+    # stop conditional would go here     
     
     #================== Animation control ===================
     pygame.display.update()
-    clock.tick(30) # framerate in fps (30-60 is typical)
+    clock.tick(90) # framerate in fps (30-60 is typical)
 
-# pygame.display.quit() # uncomment to automatically close window at end of animation 
+#pygame.display.quit() # uncomment to automatically close window at end of animation 
