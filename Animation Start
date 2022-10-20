@@ -21,21 +21,26 @@ win = pygame.display.set_mode((w,h)) # define window variable
 WHITE = (255,255,255) # some handy RGB values
 BLACK = (0,0,0)
 
-# Changes the color of the circle every time it bounces off the wall
-def newColor(xpos, new):
+# create a function to call to change the color of the ball after it interacts with the boundaries of the window
+def newColor(new):
     while running:
+        # if the ball touches the boundary of the window, it changes color
         if xpos >= 295 or xpos <= -295:
             new = random.choice(color)
+        # return the new color value
         return new
 
+# create a function to call to change the direction of the ball after it interacts with the boundaries of the window
 def oscillate(xpos, step):
     while running:
         xpos += step
+        # if the ball touches the boundary of the window, it changes direction
         if xpos >= 300 or xpos <= -300:
             step *= -1
+        # if the ball does not touch the boundary of the window, it continues on it's path
         else:
             xpos += step
-
+        # return the new step value
         return step
 
 
@@ -52,17 +57,22 @@ col_choice = random.choice(color)
 running = True
 count = 0 # Counter
 
-
+# make sure the window fills in black to start
 win.fill(BLACK)
-# oscillate(Step, xpos, x, y, clock, color, col_choice, running)
+# create a loop to run until it no longer becomes True
 while running:
     # clear window (comment out to have trace behind animation)
     win.fill(BLACK)
+    # create a circle to animate
     pygame.draw.circle(win, col_choice, (x+xpos,y), 50)
 
+    # start moving the circle
     xpos += Step
+    # start counting the iterations
     count += 1
+    # call oscillate() function
     Step = oscillate(xpos, Step)
+    # call newColor() function
     col_choice = newColor(xpos, col_choice)
   
 
@@ -72,6 +82,7 @@ while running:
             if event.type == pygame.QUIT:
                 running = False # stops animation
 
+    # if the iterations go more than 2000 times, stop running the code
     if count == 2000:
         running = False
 
