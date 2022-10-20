@@ -21,6 +21,12 @@ win = pygame.display.set_mode((w,h)) # define window variable
 WHITE = (255,255,255) # some handy RGB values
 BLACK = (0,0,0)
 
+def newColor(xpos, new):
+    while running:
+        if xpos >= 295 or xpos <= -295:
+            new = random.choice(color)
+        return new
+
 def oscillate(xpos, step):
     while running:
         xpos += step
@@ -39,7 +45,7 @@ xpos = 5
 x = w/2
 y = h/2
 clock = pygame.time.Clock() # for framerate timing
-color = ("red", "orange", "yellow", "green", "blue", "violet", "white")
+color = ("red", "orange", "yellow", "green", "blue", "purple", "violet", "white")
 col_choice = random.choice(color)
 running = True
 
@@ -49,11 +55,11 @@ win.fill(BLACK)
 while running:
     # clear window (comment out to have trace behind animation)
     win.fill(BLACK)
-    col_choice = random.choice(color)
     pygame.draw.circle(win, col_choice, (x+xpos,y), 50)
 
     xpos += Step
     Step = oscillate(xpos, Step)
+    col_choice = newColor(xpos, col_choice)
 
     # This loop allows windows when exit is clicked.
     # Do not change, remove or augment this loop...yet.
