@@ -2,7 +2,7 @@
 Pygame Startere Code
 ATLS 1300
 Author: Juliette Goubeaud, Autumn Bement, Kai Adamchak
-10/14/2022
+10/21/2022
 
 Description:
 Ball goes across screen and when it interacts with the boundaries of the window it changes color and direction.
@@ -26,6 +26,7 @@ def newColor(new):
     while running:
         # if the ball touches the boundary of the window, it changes color
         if xpos >= 295 or xpos <= -295:
+            # the ball changes color through the warm colors only after interacting with the boundary
             new = random.choice(color)
         # return the new color value
         return new
@@ -59,7 +60,12 @@ xpos = 5
 x = w/2
 y = h/2
 clock = pygame.time.Clock() # for framerate timing
-color = ("red", "orange", "yellow", "green", "blue", "purple", "violet", "white")
+# the colors will be randomly chosen from the list below, whenever the hit a boundary, they'll change between warm colors (red, orange, yellow, or white)
+color = ("white", "red", "orange", "yellow")
+# the colors will be randomly chosen from the list below, whenever a key is pressed, they'll change between cool colors (green, blue, purple, or violet)
+colors = ("green", "blue", "purple", "violet")
+# the colors will be randomly chosen from the list belwo, whenever a mouse button is pressed, they'll change between any of the colors (white, red, orange, yellow, green, blue, purple, or violet)
+allColors = ("white", "red", "orange", "yellow", "green", "blue", "purple", "violet")
 col_choice = random.choice(color)
 iteration = 0
 running = True
@@ -91,6 +97,15 @@ while running:
     for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False # stops animation
+
+            # whenever a key is clicked, the colors will change and become cool colors (green, blue, purple, violet)
+            if event.type == pygame.KEYDOWN:
+                col_choice = random.choice(colors)
+
+            # whenever a mouse button is clicked, the colors will change and become any of the possible colors
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                col_choice = random.choice(allColors)
+
                 
     #================== Your animation tasks ================
     # call functions, increment values
