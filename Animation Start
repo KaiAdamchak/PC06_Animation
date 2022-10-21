@@ -6,14 +6,14 @@ Author: Juliette Goubeaud, Autumn Bement, Kai Adamchak
 
 Description:
 Ball goes across screen and when it interacts with the boundaries of the window it changes color and direction.
+
+A ball goes across the screen and when it interacts with the boundaries, it will change to a warm color. 
+When the spacebar is pressed, it will change to a cool color and when the mouse is pressed, the ball will change into a random color. 
 '''"""
 
 import pygame, random, math
-
-#use the main function
 def main():
     pygame.init() # initialize pygame managers
-
     # create a window
     w = 600
     h = 600
@@ -54,19 +54,6 @@ def main():
             # return the new step value
             return step
 
-    # create a function to change the color of the ball when a key is pressed
-    def keyPress(col_choice):
-        # whenever a key is clicked, the colors will change and become cool colors (green, blue, purple, violet)
-        if event.type == pygame.KEYDOWN:
-            col_choice = random.choice(colors)
-        return col_choice
-
-    # create a function to change the color of the ball when a mouse button is clicked
-    def mouseClick(col_choice):
-        # whenever a mouse button is clicked, the colors will change and become any of the possible colors
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            col_choice = random.choice(allColors)  
-        return col_choice 
 
     #================================ Animation loop ===================================================
 
@@ -114,10 +101,14 @@ def main():
                 if event.type == pygame.QUIT:
                     running = False # stops animation
 
-                # call function for color change when keys are pressed
-                col_choice = keyPress(col_choice)
-                # call function for color change when mouse buttons are clicked
-                col_choice = mouseClick(col_choice)
+                # whenever a key is clicked, the colors will change and become cool colors (green, blue, purple, violet)
+                if event.type == pygame.KEYDOWN:
+                    col_choice = random.choice(colors)
+
+                # whenever a mouse button is clicked, the colors will change and become any of the possible colors
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    col_choice = random.choice(allColors)
+
                     
         #================== Your animation tasks ================
         # call functions, increment values
@@ -128,7 +119,5 @@ def main():
         #================== Animation control ===================
         pygame.display.update()
         clock.tick(30) # framerate in fps (30-60 is typical)
-
-    # pygame.display.quit() # uncomment to automatically close window at end of animation 
-#call the main function
-main()
+main() 
+# pygame.display.quit() # uncomment to automatically close window at end of animation 
