@@ -5,8 +5,6 @@ Author: Juliette Goubeaud, Autumn Bement, Kai Adamchak
 10/21/2022
 
 Description:
-Ball goes across screen and when it interacts with the boundaries of the window it changes color and direction.
-
 A ball goes across the screen and when it interacts with the boundaries, it will change to a warm color. 
 When the spacebar is pressed, it will change to a cool color and when the mouse is pressed, the ball will change into a random color. 
 '''"""
