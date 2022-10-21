@@ -9,121 +9,126 @@ Ball goes across screen and when it interacts with the boundaries of the window 
 '''"""
 
 import pygame, random, math
-pygame.init() # initialize pygame managers
 
-# create a window
-w = 600
-h = 600
-win = pygame.display.set_mode((w,h)) # define window variable
-# pygame.display.set_caption("Read carefully.") # uncomment & edit to caption the window
+#use the main function
+def main():
+    pygame.init() # initialize pygame managers
 
-#======================== Variables & functions ===================================================
-WHITE = (255,255,255) # some handy RGB values
-BLACK = (0,0,0)
+    # create a window
+    w = 600
+    h = 600
+    win = pygame.display.set_mode((w,h)) # define window variable
+    # pygame.display.set_caption("Read carefully.") # uncomment & edit to caption the window
 
-# create a function to call to change the color of the ball after it interacts with the boundaries of the window
-def newColor(new):
-    while running:
-        # if the ball touches the boundary of the window, it changes color
-        if xpos >= 295 or xpos <= -295:
-            # the ball changes color through the warm colors only after interacting with the boundary
-            new = random.choice(color)
-        # return the new color value
-        return new
+    #======================== Variables & functions ===================================================
+    WHITE = (255,255,255) # some handy RGB values
+    BLACK = (0,0,0)
 
-# create a function to call to count how many times the code has iterated
-def iterationCount(iter):
-    while running:
-        if xpos >= 295 or xpos <= -295:
-            iter += 1
-        return iter
+    # create a function to call to change the color of the ball after it interacts with the boundaries of the window
+    def newColor(new):
+        while running:
+            # if the ball touches the boundary of the window, it changes color
+            if xpos >= 295 or xpos <= -295:
+                # the ball changes color through the warm colors only after interacting with the boundary
+                new = random.choice(color)
+            # return the new color value
+            return new
 
-# create a function to call to change the direction of the ball after it interacts with the boundaries of the window
-def oscillate(xpos, step):
-    while running:
-        xpos += step
-        # if the ball touches the boundary of the window, it changes direction
-        if xpos >= 300 or xpos <= -300:
-            step *= -1
-        # if the ball does not touch the boundary of the window, it continues on it's path
-        else:
+    # create a function to call to count how many times the code has iterated
+    def iterationCount(iter):
+        while running:
+            if xpos >= 295 or xpos <= -295:
+                iter += 1
+            return iter
+
+    # create a function to call to change the direction of the ball after it interacts with the boundaries of the window
+    def oscillate(xpos, step):
+        while running:
             xpos += step
-        # return the new step value
-        return step
+            # if the ball touches the boundary of the window, it changes direction
+            if xpos >= 300 or xpos <= -300:
+                step *= -1
+            # if the ball does not touch the boundary of the window, it continues on it's path
+            else:
+                xpos += step
+            # return the new step value
+            return step
 
-# create a function to change the color of the ball when a key is pressed
-def keyPress(col_choice):
-    # whenever a key is clicked, the colors will change and become cool colors (green, blue, purple, violet)
-    if event.type == pygame.KEYDOWN:
-        col_choice = random.choice(colors)
-    return col_choice
+    # create a function to change the color of the ball when a key is pressed
+    def keyPress(col_choice):
+        # whenever a key is clicked, the colors will change and become cool colors (green, blue, purple, violet)
+        if event.type == pygame.KEYDOWN:
+            col_choice = random.choice(colors)
+        return col_choice
 
-# create a function to change the color of the ball when a mouse button is clicked
-def mouseClick(col_choice):
-    # whenever a mouse button is clicked, the colors will change and become any of the possible colors
-    if event.type == pygame.MOUSEBUTTONDOWN:
-        col_choice = random.choice(allColors)  
-    return col_choice 
+    # create a function to change the color of the ball when a mouse button is clicked
+    def mouseClick(col_choice):
+        # whenever a mouse button is clicked, the colors will change and become any of the possible colors
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            col_choice = random.choice(allColors)  
+        return col_choice 
 
-#================================ Animation loop ===================================================
+    #================================ Animation loop ===================================================
 
-# start values defined here
-Step = 5
-xpos = 5
-x = w/2
-y = h/2
-clock = pygame.time.Clock() # for framerate timing
-# the colors will be randomly chosen from the list below, whenever the hit a boundary, they'll change between warm colors (red, orange, yellow, or white)
-color = ("white", "red", "orange", "yellow")
-# the colors will be randomly chosen from the list below, whenever a key is pressed, they'll change between cool colors (green, blue, purple, or violet)
-colors = ("green", "blue", "purple", "violet")
-# the colors will be randomly chosen from the list belwo, whenever a mouse button is pressed, they'll change between any of the colors (white, red, orange, yellow, green, blue, purple, or violet)
-allColors = ("white", "red", "orange", "yellow", "green", "blue", "purple", "violet")
-col_choice = random.choice(color)
-iteration = 0
-running = True
+    # start values defined here
+    Step = 5
+    xpos = 5
+    x = w/2
+    y = h/2
+    clock = pygame.time.Clock() # for framerate timing
+    # the colors will be randomly chosen from the list below, whenever the hit a boundary, they'll change between warm colors (red, orange, yellow, or white)
+    color = ("white", "red", "orange", "yellow")
+    # the colors will be randomly chosen from the list below, whenever a key is pressed, they'll change between cool colors (green, blue, purple, or violet)
+    colors = ("green", "blue", "purple", "violet")
+    # the colors will be randomly chosen from the list belwo, whenever a mouse button is pressed, they'll change between any of the colors (white, red, orange, yellow, green, blue, purple, or violet)
+    allColors = ("white", "red", "orange", "yellow", "green", "blue", "purple", "violet")
+    col_choice = random.choice(color)
+    iteration = 0
+    running = True
 
-# make sure the window fills in black to start
-win.fill(BLACK)
-# create a loop to run until it no longer becomes True
-while running:
-    # clear window (comment out to have trace behind animation)
+    # make sure the window fills in black to start
     win.fill(BLACK)
-    # create a circle to animate
-    pygame.draw.circle(win, col_choice, (x+xpos,y), 50)
+    # create a loop to run until it no longer becomes True
+    while running:
+        # clear window (comment out to have trace behind animation)
+        win.fill(BLACK)
+        # create a circle to animate
+        pygame.draw.circle(win, col_choice, (x+xpos,y), 50)
 
-    #start moving the circle
-    xpos += Step
-    #call oscillate() function
-    Step = oscillate(xpos, Step)
-    #call newColor() function
-    col_choice = newColor(col_choice)
-    #call iterationCount() function
-    iteration = iterationCount(iteration)
+        #start moving the circle
+        xpos += Step
+        #call oscillate() function
+        Step = oscillate(xpos, Step)
+        #call newColor() function
+        col_choice = newColor(col_choice)
+        #call iterationCount() function
+        iteration = iterationCount(iteration)
 
-    # if the code has iterated a certain number of times, stop the code from running
-    if iteration >= 20:
-        running = False
+        # if the code has iterated a certain number of times, stop the code from running
+        if iteration >= 20:
+            running = False
 
-    # This loop allows windows when exit is clicked.
-    # Do not change, remove or augment this loop...yet.
-    for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False # stops animation
+        # This loop allows windows when exit is clicked.
+        # Do not change, remove or augment this loop...yet.
+        for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False # stops animation
 
-            # call function for color change when keys are pressed
-            col_choice = keyPress(col_choice)
-            # call function for color change when mouse buttons are clicked
-            col_choice = mouseClick(col_choice)
-                
-    #================== Your animation tasks ================
-    # call functions, increment values
-    
-    # stop conditional would go here too
-    
-    
-    #================== Animation control ===================
-    pygame.display.update()
-    clock.tick(30) # framerate in fps (30-60 is typical)
+                # call function for color change when keys are pressed
+                col_choice = keyPress(col_choice)
+                # call function for color change when mouse buttons are clicked
+                col_choice = mouseClick(col_choice)
+                    
+        #================== Your animation tasks ================
+        # call functions, increment values
+        
+        # stop conditional would go here too
+        
+        
+        #================== Animation control ===================
+        pygame.display.update()
+        clock.tick(30) # framerate in fps (30-60 is typical)
 
-# pygame.display.quit() # uncomment to automatically close window at end of animation 
+    # pygame.display.quit() # uncomment to automatically close window at end of animation 
+#call the main function
+main()
