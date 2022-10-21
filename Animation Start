@@ -51,6 +51,17 @@ def oscillate(xpos, step):
         # return the new step value
         return step
 
+def keyPress(col_choice):
+    # whenever a key is clicked, the colors will change and become cool colors (green, blue, purple, violet)
+    if event.type == pygame.KEYDOWN:
+        col_choice = random.choice(colors)
+    return col_choice
+
+def mouseClick(col_choice):
+    # whenever a mouse button is clicked, the colors will change and become any of the possible colors
+    if event.type == pygame.MOUSEBUTTONDOWN:
+        col_choice = random.choice(allColors)  
+    return col_choice 
 
 #================================ Animation loop ===================================================
 
@@ -98,13 +109,9 @@ while running:
             if event.type == pygame.QUIT:
                 running = False # stops animation
 
-            # whenever a key is clicked, the colors will change and become cool colors (green, blue, purple, violet)
-            if event.type == pygame.KEYDOWN:
-                col_choice = random.choice(colors)
-
-            # whenever a mouse button is clicked, the colors will change and become any of the possible colors
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                col_choice = random.choice(allColors)
+            col_choice = keyPress(col_choice)
+            col_choice = mouseClick(col_choice)
+            
 
                 
     #================== Your animation tasks ================
